@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Entry} from './entries.model';
+import {Category, Entry} from './entries.model';
+import {MatDialog} from '@angular/material';
+import {EntryDialogComponent} from '../entry-dialog/entry-dialog.component';
+import {EntryService} from '../entry.service';
 
 @Component({
   selector: 'app-entry',
@@ -9,14 +12,34 @@ import {Entry} from './entries.model';
 })
 export class EntriesComponent implements OnInit {
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, public dialog: MatDialog, private entryService: EntryService) {
   }
 
-  entries: Entry[];
+  displayedColumns: string[] = ['id', 'categoryName', 'checkIn', 'checkOut'];
+  dataSource: Entry[];
+
+  id: number;
+  checkIn: Date;
+  checkOut: Date;
 
   ngOnInit() {
-    this.httpClient.get<Entry[]>('api/entries')
-      .subscribe(entries => this.entries = entries);
+    this.entryService.getEntries()
+      .subscribe(entries => this.dataSource = entries);
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(EntryDialogComponent, {
+      width: '250px',
+      data: {id: 0, checkIn: '', checkOut: '', category: {}}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+      this.entryService.createEntry(result).subscribe(() => {
+        this.ngOnInit();
+      });
+    });
   }
 
 }

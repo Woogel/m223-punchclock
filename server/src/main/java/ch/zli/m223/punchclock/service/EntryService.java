@@ -11,6 +11,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class EntryService {
+
     private final EntryRepository entryRepository;
 
     public Entry createEntry(Entry entry) {
