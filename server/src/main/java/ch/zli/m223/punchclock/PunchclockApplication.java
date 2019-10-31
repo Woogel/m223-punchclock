@@ -2,6 +2,8 @@ package ch.zli.m223.punchclock;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
 public class PunchclockApplication {
@@ -10,5 +12,10 @@ public class PunchclockApplication {
 		System.setProperty("server.servlet.context-path", "/api");
 		SpringApplication.run(PunchclockApplication.class, args);
 	}
+
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
 }
