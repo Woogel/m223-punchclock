@@ -3,17 +3,15 @@ package ch.zli.m223.punchclock.service;
 import ch.zli.m223.punchclock.domain.Entry;
 import ch.zli.m223.punchclock.exception.BadRequestException;
 import ch.zli.m223.punchclock.repository.EntryRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class EntryService {
-    private EntryRepository entryRepository;
-
-    public EntryService(EntryRepository entryRepository) {
-        this.entryRepository = entryRepository;
-    }
+    private final EntryRepository entryRepository;
 
     public Entry createEntry(Entry entry) {
         validateTimestamps(entry);
