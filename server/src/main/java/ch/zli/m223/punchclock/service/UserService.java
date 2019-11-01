@@ -1,9 +1,11 @@
 package ch.zli.m223.punchclock.service;
 
 import ch.zli.m223.punchclock.domain.User;
+import ch.zli.m223.punchclock.exception.BadRequestException;
 import ch.zli.m223.punchclock.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -21,7 +23,11 @@ public class UserService implements UserDetailsService {
 
     public void signUpUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
+        try {
+            userRepository.save(user);
+        } catch (DataIntegrityViolationException e) {
+            throw new BadRequestException("User with name " + user.getUsername() + " already exists.");
+        }
     }
 
     @Override

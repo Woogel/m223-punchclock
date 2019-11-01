@@ -1,19 +1,26 @@
+<h2 mat-dialog-title>Create entry</h2>
+
 <form>
   <mat-form-field>
-    <input matInput [(ngModel)]="data.checkIn" name="checkIn" placeholder="Check-In">
+    <input matInput [(ngModel)]="entry.checkIn" [matDatepicker]="checkInPicker" name="checkIn" placeholder="Check-In">
+    <mat-datepicker-toggle matSuffix [for]="checkInPicker"></mat-datepicker-toggle>
+    <mat-datepicker #checkInPicker></mat-datepicker>
   </mat-form-field>
 
   <mat-form-field>
-    <input type="text" [(ngModel)]="data.checkOut" name="checkOut" matInput placeholder="Check-Out">
+    <input matInput [(ngModel)]="entry.checkOut" name="checkOut" [matDatepicker]="checkOutPicker"
+           placeholder="Check-Out">
+    <mat-datepicker-toggle matSuffix [for]="checkOutPicker"></mat-datepicker-toggle>
+    <mat-datepicker #checkOutPicker></mat-datepicker>
   </mat-form-field>
 
   <mat-form-field>
-    <mat-select placeholder="Category" [(value)]="categoryId">
+    <mat-select placeholder="Category" [(value)]="entry.category.id">
       <mat-option *ngFor="let category of categories" value="{{category.id}}" name="category">{{category.name}}</mat-option>
     </mat-select>
   </mat-form-field>
 
-  <button mat-button (click)="submit()">Submit!</button>
+  <button mat-flat-button color="accent" (click)="submit()">Create</button>
 
 </form>
 

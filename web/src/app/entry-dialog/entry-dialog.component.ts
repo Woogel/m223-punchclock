@@ -1,7 +1,6 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {Category, Entry} from '../entry/entries.model';
-import {EntryService} from '../entry.service';
+import {Component, OnInit} from '@angular/core';
+import {MatDialogRef} from '@angular/material';
+import {Category, Entry} from '../entries/entries.model';
 import {CategoryService} from '../category.service';
 
 @Component({
@@ -12,11 +11,11 @@ import {CategoryService} from '../category.service';
 export class EntryDialogComponent implements OnInit {
 
   private categories: Category[] = [];
-  private categoryId: number;
+  private entry = {checkIn: new Date(), checkOut: new Date(), category: {id: 0, name: ''}} as Entry;
 
   constructor(
     public dialogRef: MatDialogRef<EntryDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Entry, private categoryService: CategoryService) {
+    private categoryService: CategoryService) {
   }
 
   onNoClick(): void {
@@ -24,8 +23,8 @@ export class EntryDialogComponent implements OnInit {
   }
 
   submit(): void {
-    this.data.category = this.categories.filter(category => category.id === this.categoryId)[0];
-    this.dialogRef.close(this.data);
+    this.entry.category = this.categories.find(x => x.id == this.entry.category.id);
+    this.dialogRef.close(this.entry);
   }
 
   ngOnInit(): void {

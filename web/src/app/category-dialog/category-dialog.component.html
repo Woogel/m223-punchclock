@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>Create Category</h2>
+
+<form>
+  <mat-form-field>
+    <input matInput [(ngModel)]="category.name" name="name" placeholder="Name">
+  </mat-form-field>
+
+  <button mat-flat-button color="accent" (click)="submit()">Create!</button>
+</form>
+
+
+

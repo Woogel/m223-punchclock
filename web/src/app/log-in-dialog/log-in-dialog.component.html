@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>{{data.description}}</h2>
+
+<form>
+  <mat-form-field color="accent">
+    <input matInput [(ngModel)]="user.username" name="username" placeholder="Username">
+  </mat-form-field>
+
+  <mat-form-field color="accent">
+    <input type="password" [(ngModel)]="user.password" name="checkOut" matInput placeholder="Password">
+  </mat-form-field>
+
+  <button mat-flat-button color="accent" (click)="submit()">{{data.description}}</button>
+  <div *ngIf="!data.isRegistration" class="register-link" (click)="switchToRegistration()">Register</div>
+</form>
+
+
+

@@ -1,5 +1,12 @@
 <mat-toolbar>
-  <span>Punchclock</span>
+  <div class="toolbar-content">
+    <span>Punchclock</span>
+    <button *ngIf="!userLoggedIn(); else logOutButton" mat-flat-button color="accent" (click)="submit()">Log-In!
+    </button>
+    <ng-template #logOutButton>
+      <button mat-flat-button color="accent" (click)="logOut()">Log-Out!</button>
+    </ng-template>
+  </div>
 </mat-toolbar>
 
 <div class="content">

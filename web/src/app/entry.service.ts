@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Entry} from './entry/entries.model';
+import {Entry} from './entries/entries.model';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
