@@ -16,6 +16,7 @@ export class LogInDialogComponent implements OnInit {
     password: ''
   } as User;
 
+
   constructor(
     public dialogRef: MatDialogRef<LogInDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data, private categoryService: CategoryService,
@@ -27,6 +28,7 @@ export class LogInDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.dialogRef.disableClose = true;
   }
 
   submit() {
