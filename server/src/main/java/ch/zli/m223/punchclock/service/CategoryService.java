@@ -20,4 +20,12 @@ public class CategoryService {
     public List<Category> findAll() {
         return categoryRepository.findAll();
     }
+
+    public void deleteCategory(long categoryId) {
+        // TODO: delete Category
+    }
+
+    public void updateCategory(Category category) {
+        // TODO: Update Category
+    }
 }

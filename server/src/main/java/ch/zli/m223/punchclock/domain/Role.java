@@ -6,18 +6,12 @@ import javax.persistence.*;
 
 @Entity
 @Data
-public class User {
+public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique=true)
-    private String username;
-
-    @Column(nullable = false)
-    private String password;
-
-    @ManyToOne
-    private Role role;
+    @Column(nullable = false, unique = true)
+    private String name;
 }

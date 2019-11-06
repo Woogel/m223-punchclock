@@ -19,4 +19,22 @@ public class UserController {
     public void signUp(@RequestBody User user) {
         userService.signUpUser(user);
     }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public void getAllUsers() {
+        userService.getAllUsers();
+    }
+
+    @DeleteMapping
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteUser(long userId) {
+        userService.deleteUser(userId);
+    }
+
+    @PutMapping
+    @ResponseStatus(HttpStatus.OK)
+    public void updateUser(User user) {
+        userService.updateUser(user);
+    }
 }

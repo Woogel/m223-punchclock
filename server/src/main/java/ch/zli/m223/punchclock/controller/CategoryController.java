@@ -27,4 +27,16 @@ public class CategoryController {
     public List<Category> getAllCategories() {
         return categoryService.findAll();
     }
+
+    @DeleteMapping
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteCategory(long categoryId) {
+        categoryService.deleteCategory(categoryId);
+    }
+
+    @PutMapping
+    @ResponseStatus(HttpStatus.OK)
+    public void updateCategory(Category category) {
+        categoryService.updateCategory(category);
+    }
 }
