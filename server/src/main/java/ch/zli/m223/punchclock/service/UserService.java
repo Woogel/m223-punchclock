@@ -28,6 +28,7 @@ public class UserService implements UserDetailsService {
 
     public void signUpUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setRole(SecurityConstants.RoleConstants.USER_ROLE);
         try {
             userRepository.save(user);
         } catch (DataIntegrityViolationException e) {
