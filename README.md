@@ -22,8 +22,12 @@ These instructions will get you a copy of the project up and running on your loc
 5. When the previous step is finished, run `npm run start` to start the frontend of the application.
 6. Open your browser on `http://localhost:4200`
 
-To access the admin page, go to /admin.
-Per default, the admin credentials are: username: "admin", password: "toor".
+To access the admin page, go to **/admin**.
+Per default, the admin credentials are: 
+
+**username:** admin
+
+**password:** toor
 
 ## Running the tests
 
