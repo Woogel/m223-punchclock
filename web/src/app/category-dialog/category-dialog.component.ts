@@ -14,7 +14,7 @@ export class CategoryDialogComponent {
   } as Category;
 
   constructor(
-    public dialogRef: MatDialogRef<CategoryDialogComponent>,) {
+    public dialogRef: MatDialogRef<CategoryDialogComponent>) {
   }
 
   onNoClick(): void {

@@ -23,7 +23,8 @@ import {LogInComponent} from './log-in/log-in.component';
 import {CredentialInterceptor} from './credential.interceptor';
 import {LogInDialogComponent} from './log-in-dialog/log-in-dialog.component';
 import {CategoryDialogComponent} from './category-dialog/category-dialog.component';
-import { AdminComponent } from './admin/admin.component';
+import {AdminComponent} from './admin/admin.component';
+import {AdminDialogComponent} from './admin-dialog/admin-dialog.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { AdminComponent } from './admin/admin.component';
     LogInComponent,
     LogInDialogComponent,
     CategoryDialogComponent,
-    AdminComponent
+    AdminComponent,
+    AdminDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +61,11 @@ import { AdminComponent } from './admin/admin.component';
     }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [EntryDialogComponent, LogInDialogComponent, CategoryDialogComponent]
+  entryComponents: [
+    EntryDialogComponent,
+    LogInDialogComponent,
+    CategoryDialogComponent,
+    AdminDialogComponent]
 })
 export class AppModule {
 }

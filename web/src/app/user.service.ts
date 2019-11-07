@@ -22,4 +22,12 @@ export class UserService {
   getAllUsers(): Observable<User[]> {
     return this.httpClient.get<User[]>('api/users');
   }
+
+  deleteUser(id: number) {
+    return this.httpClient.delete('/api/users/' + id);
+  }
+
+  updateUser(result: UserService) {
+    return this.httpClient.put('/api/users', result);
+  }
 }
