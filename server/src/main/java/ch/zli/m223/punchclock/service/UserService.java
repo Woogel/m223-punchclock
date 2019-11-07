@@ -4,6 +4,7 @@ import ch.zli.m223.punchclock.domain.User;
 import ch.zli.m223.punchclock.exception.BadRequestException;
 import ch.zli.m223.punchclock.exception.ForbiddenAccessException;
 import ch.zli.m223.punchclock.exception.NotFoundException;
+import ch.zli.m223.punchclock.repository.EntryRepository;
 import ch.zli.m223.punchclock.repository.UserRepository;
 import ch.zli.m223.punchclock.security.SecurityConstants;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,7 @@ public class UserService implements UserDetailsService {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final UserRepository userRepository;
+    private final EntryRepository entryRepository;
 
     public void signUpUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
@@ -53,10 +55,8 @@ public class UserService implements UserDetailsService {
     }
 
     public void updateUser(User user) {
-        User existingUser = userRepository.findByUsername(user.getUsername());
-        if (existingUser == null) {
-            throw new NotFoundException("Couldn't find user with username " + user.getUsername());
-        }
+        User existingUser = userRepository.findById(user.getId())
+                .orElseThrow(() -> new NotFoundException("Couldn't find user with username " + user.getUsername()));
         if (!user.getPassword().equals(existingUser.getPassword())) {
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         }
@@ -64,6 +64,7 @@ public class UserService implements UserDetailsService {
     }
 
     public void deleteUser(long userId) {
+        entryRepository.deleteEntriesByUserId(userId);
         userRepository.deleteById(userId);
     }
 
