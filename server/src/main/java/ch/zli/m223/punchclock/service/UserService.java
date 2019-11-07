@@ -57,8 +57,9 @@ public class UserService implements UserDetailsService {
         if (existingUser == null) {
             throw new NotFoundException("Couldn't find user with username " + user.getUsername());
         }
-        user.setRole(existingUser.getRole());
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        if (!user.getPassword().equals(existingUser.getPassword())) {
+            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        }
         userRepository.saveAndFlush(user);
     }
 
