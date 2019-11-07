@@ -23,6 +23,7 @@ import {LogInComponent} from './log-in/log-in.component';
 import {CredentialInterceptor} from './credential.interceptor';
 import {LogInDialogComponent} from './log-in-dialog/log-in-dialog.component';
 import {CategoryDialogComponent} from './category-dialog/category-dialog.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {CategoryDialogComponent} from './category-dialog/category-dialog.compone
     EntryDialogComponent,
     LogInComponent,
     LogInDialogComponent,
-    CategoryDialogComponent
+    CategoryDialogComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

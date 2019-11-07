@@ -27,6 +27,7 @@ export class CredentialInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         if (error.status === 403) {
           this.router.navigate(['/log-in']);
+          this.localStorageService.clear();
         }
         return throwError(error);
       }));

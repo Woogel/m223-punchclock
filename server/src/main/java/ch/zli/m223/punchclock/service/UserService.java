@@ -3,6 +3,7 @@ package ch.zli.m223.punchclock.service;
 import ch.zli.m223.punchclock.domain.User;
 import ch.zli.m223.punchclock.exception.BadRequestException;
 import ch.zli.m223.punchclock.exception.ForbiddenAccessException;
+import ch.zli.m223.punchclock.exception.NotFoundException;
 import ch.zli.m223.punchclock.repository.UserRepository;
 import ch.zli.m223.punchclock.security.SecurityConstants;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +29,9 @@ public class UserService implements UserDetailsService {
 
     public void signUpUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setRole(SecurityConstants.RoleConstants.USER_ROLE);
+        if (user.getRole() == null) {
+            user.setRole(SecurityConstants.RoleConstants.USER_ROLE);
+        }
         try {
             userRepository.save(user);
         } catch (DataIntegrityViolationException e) {
@@ -50,14 +53,20 @@ public class UserService implements UserDetailsService {
     }
 
     public void updateUser(User user) {
-        // TODO: update User
+        User existingUser = userRepository.findByUsername(user.getUsername());
+        if (existingUser == null) {
+            throw new NotFoundException("Couldn't find user with username " + user.getUsername());
+        }
+        user.setRole(existingUser.getRole());
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        userRepository.saveAndFlush(user);
     }
 
     public void deleteUser(long userId) {
-        // TODO: delete User
+        userRepository.deleteById(userId);
     }
 
-    private User getCurrentUser() {
+    public User getCurrentUser() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         return userRepository.findByUsername(username);
     }

@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -29,16 +30,16 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{userId}")
     @ResponseStatus(HttpStatus.OK)
-    public void deleteUser(long userId) {
+    public void deleteUser(@PathVariable("userId") Long userId) {
         userService.checkIfCurrentUserIsAdmin();
         userService.deleteUser(userId);
     }
 
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    public void updateUser(User user) {
+    public void updateUser(@Valid @RequestBody User user) {
         userService.checkIfCurrentUserIsAdmin();
         userService.updateUser(user);
     }

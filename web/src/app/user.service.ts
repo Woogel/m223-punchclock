@@ -8,7 +8,7 @@ import {User} from './log-in/log-in.model';
 })
 export class UserService {
 
-  constructor(private httpClient: HttpClient,) {
+  constructor(private httpClient: HttpClient) {
   }
 
   signUpUser(user: User): Observable<User> {
@@ -17,5 +17,9 @@ export class UserService {
 
   loginUser(user: User): Observable<any> {
     return this.httpClient.post<any>('api/login', user, {observe: 'response'});
+  }
+
+  getAllUsers(): Observable<User[]> {
+    return this.httpClient.get<User[]>('api/users');
   }
 }

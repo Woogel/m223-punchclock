@@ -20,4 +20,9 @@ public class BasicExceptionHandler extends ResponseEntityExceptionHandler {
     public void forbidenAccess(HttpServletResponse response) throws IOException {
         response.sendError(HttpStatus.FORBIDDEN.value());
     }
+
+    @ExceptionHandler(NotFoundException.class)
+    public void notFoundException(HttpServletResponse response) throws IOException {
+        response.sendError(HttpStatus.NOT_FOUND.value());
+    }
 }

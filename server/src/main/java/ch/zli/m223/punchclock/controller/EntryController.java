@@ -2,6 +2,7 @@ package ch.zli.m223.punchclock.controller;
 
 import ch.zli.m223.punchclock.domain.Entry;
 import ch.zli.m223.punchclock.service.EntryService;
+import ch.zli.m223.punchclock.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -15,11 +16,12 @@ import java.util.List;
 public class EntryController {
 
     private final EntryService entryService;
+    private final UserService userService;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Entry> getAllEntries() {
-        return entryService.findAll();
+    public List<Entry> getUserEntries() {
+        return entryService.findUserEntries();
     }
 
     @PostMapping

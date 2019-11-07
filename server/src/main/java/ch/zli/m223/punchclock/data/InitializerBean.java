@@ -4,8 +4,8 @@ import ch.zli.m223.punchclock.domain.Category;
 import ch.zli.m223.punchclock.domain.User;
 import ch.zli.m223.punchclock.repository.CategoryRepository;
 import ch.zli.m223.punchclock.repository.RoleRepository;
-import ch.zli.m223.punchclock.repository.UserRepository;
 import ch.zli.m223.punchclock.security.SecurityConstants;
+import ch.zli.m223.punchclock.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
@@ -21,7 +21,7 @@ public class InitializerBean implements InitializingBean {
     private boolean alreadySetup = false;
 
     private final CategoryRepository categoryRepository;
-    private final UserRepository userRepository;
+    private final UserService userService;
     private final RoleRepository roleRepository;
 
     @Override
@@ -33,7 +33,7 @@ public class InitializerBean implements InitializingBean {
         roleRepository.saveAndFlush(SecurityConstants.RoleConstants.ADMIN_ROLE);
         roleRepository.saveAndFlush(SecurityConstants.RoleConstants.USER_ROLE);
 
-        userRepository.saveAndFlush(DEFAULT_ADMIN_USER);
+        userService.signUpUser(DEFAULT_ADMIN_USER);
 
         categoryRepository.saveAll(getMockCategories());
         categoryRepository.flush();
