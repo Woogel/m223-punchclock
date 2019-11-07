@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RequiredArgsConstructor
 @RequestMapping("/users")
@@ -22,19 +24,22 @@ public class UserController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public void getAllUsers() {
-        userService.getAllUsers();
+    public List<User> getAllUsers() {
+        userService.checkIfCurrentUserIsAdmin();
+        return userService.getAllUsers();
     }
 
     @DeleteMapping
     @ResponseStatus(HttpStatus.OK)
     public void deleteUser(long userId) {
+        userService.checkIfCurrentUserIsAdmin();
         userService.deleteUser(userId);
     }
 
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
     public void updateUser(User user) {
+        userService.checkIfCurrentUserIsAdmin();
         userService.updateUser(user);
     }
 }

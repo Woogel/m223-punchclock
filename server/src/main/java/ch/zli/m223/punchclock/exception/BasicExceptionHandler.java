@@ -15,4 +15,9 @@ public class BasicExceptionHandler extends ResponseEntityExceptionHandler {
     public void badRequest(HttpServletResponse response) throws IOException {
         response.sendError(HttpStatus.BAD_REQUEST.value());
     }
+
+    @ExceptionHandler(ForbiddenAccessException.class)
+    public void forbidenAccess(HttpServletResponse response) throws IOException {
+        response.sendError(HttpStatus.FORBIDDEN.value());
+    }
 }

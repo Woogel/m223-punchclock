@@ -2,10 +2,13 @@ package ch.zli.m223.punchclock.service;
 
 import ch.zli.m223.punchclock.domain.User;
 import ch.zli.m223.punchclock.exception.BadRequestException;
+import ch.zli.m223.punchclock.exception.ForbiddenAccessException;
 import ch.zli.m223.punchclock.repository.UserRepository;
+import ch.zli.m223.punchclock.security.SecurityConstants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -33,13 +36,15 @@ public class UserService implements UserDetailsService {
     }
 
     public List<User> getAllUsers() {
-        // TODO: return all users
-        return null;
+        return userRepository.findAll();
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new BadRequestException("Couldn't find user");
+        }
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), emptyList());
     }
 
@@ -49,5 +54,17 @@ public class UserService implements UserDetailsService {
 
     public void deleteUser(long userId) {
         // TODO: delete User
+    }
+
+    private User getCurrentUser() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return userRepository.findByUsername(username);
+    }
+
+    public void checkIfCurrentUserIsAdmin() {
+        User user = getCurrentUser();
+        if (!user.getRole().equals(SecurityConstants.RoleConstants.ADMIN_ROLE)) {
+            throw new ForbiddenAccessException("The current user has not the rights to view this.");
+        }
     }
 }
