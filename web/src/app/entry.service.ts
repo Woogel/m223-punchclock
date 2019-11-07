@@ -18,4 +18,12 @@ export class EntryService {
   createEntry(entry: Entry): Observable<any> {
     return this.httpClient.post('api/entries', entry);
   }
+
+  deleteEntry(id: number) {
+    return this.httpClient.delete('api/entries/' + id);
+  }
+
+  updateEntry(entry: Entry): Observable<any> {
+    return this.httpClient.put('api/entries', entry);
+  }
 }

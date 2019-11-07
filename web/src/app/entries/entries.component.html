@@ -1,4 +1,5 @@
-<button mat-flat-button class="create-button" (click)="openEntryDialog()">Create Entry</button>
+
+<button mat-flat-button class="create-button" (click)="openCreateEntryDialog()">Create Entry</button>
 <button mat-flat-button class="create-button" (click)="openCategoryDialog()">Create Category</button>
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 entries-table">
@@ -21,6 +22,16 @@
   <ng-container matColumnDef="checkOut">
     <th mat-header-cell *matHeaderCellDef> CheckOut </th>
     <td mat-cell *matCellDef="let entry"> {{entry.checkOut | date:'medium' }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="delete">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let entry"><i class="material-icons icon" (click)="deleteEntry(entry)">delete</i></td>
+  </ng-container>
+
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let entry"><i class="material-icons icon" (click)="openUpdateEntryDialog(entry)">edit</i></td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

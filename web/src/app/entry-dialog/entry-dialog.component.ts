@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {MatDialogRef} from '@angular/material';
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Category, Entry} from '../entries/entries.model';
 import {CategoryService} from '../category.service';
 
@@ -11,11 +11,11 @@ import {CategoryService} from '../category.service';
 export class EntryDialogComponent implements OnInit {
 
   private categories: Category[] = [];
-  private entry = {checkIn: new Date(), checkOut: new Date(), category: {id: 0, name: ''}} as Entry;
 
   constructor(
     public dialogRef: MatDialogRef<EntryDialogComponent>,
-    private categoryService: CategoryService) {
+    private categoryService: CategoryService,
+    @Inject(MAT_DIALOG_DATA) public entry: Entry) {
   }
 
   onNoClick(): void {
