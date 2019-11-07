@@ -1,7 +1,8 @@
-# Punchlock
+# Punchclock
 
-The main project of the UeK: 223 (Multi-User-Applikationen objektorientiert realisieren).
+This application can be used to log your work time and assign it to the affected project.
 
+Don't worry about loosing control of your work time. Just use Punchclock!
 
 ## Getting Started
 
