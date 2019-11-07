@@ -17,12 +17,22 @@ public class UserController {
 
     private final UserService userService;
 
+    /**
+     * Writes the user into the database.
+     *
+     * @param user The user to be written into the database.
+     */
     @PostMapping("/sign-up")
     @ResponseStatus(HttpStatus.CREATED)
     public void signUp(@RequestBody User user) {
         userService.signUpUser(user);
     }
 
+    /**
+     * Gets all users from the database. User needs to have the roll "admin" to access this endpoint.
+     *
+     * @return All users written in the database.
+     */
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<User> getAllUsers() {
@@ -30,6 +40,11 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+    /**
+     * Deletes the user with the sent id.
+     *
+     * @param userId User ID of the user to be deleted.
+     */
     @DeleteMapping("/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteUser(@PathVariable("userId") Long userId) {
@@ -37,6 +52,11 @@ public class UserController {
         userService.deleteUser(userId);
     }
 
+    /**
+     * Updates the user sent in the request body. If the user doesn't exists, it gets created.
+     *
+     * @param user The user to be updated.
+     */
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
     public void updateUser(@Valid @RequestBody User user) {
