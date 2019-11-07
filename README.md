@@ -1,13 +1,38 @@
-# M223: Punchclock
-Dies ist eine Beispielapplikation für das Modul M223.
+# Punchlock
 
-## Loslegen
-Folgende Schritte befolgen um loszulegen:
-1. Sicherstellen, dass JDK 12 installiert und in der Umgebungsvariable `path` definiert ist.
-1. Ins Verzeichnis der Applikation wechseln und über die Kommandozeile mit `./gradlew bootRun` oder `./gradlew.bat bootRun` starten
-1. Unittest mit `./gradlew test` oder `./gradlew.bat test` ausführen.
-1. Ein ausführbares JAR kann mit `./gradlew bootJar` oder `./gradlew.bat bootJar` erstellt werden.
+The main project of the UeK: 223 (Multi-User-Applikationen objektorientiert realisieren).
 
-Folgende Dienste stehen während der Ausführung im Profil `dev` zur Verfügung:
-- REST-Schnittstelle der Applikation: http://localhost:8081
-- Dashboard der H2 Datenbank: http://localhost:8081/h2-console
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+
+- [OpenJDK 11](https://openjdk.java.net/projects/jdk/11/)
+- [NodeJS](https://nodejs.org/en/)
+
+### Installing
+
+1. Go to the /server directory.
+2. Run `./gradlew bootRun` to start the backend of the application.
+3. Go to the /web directory.
+4. Run `npm install` to load all needed dependencies.
+5. When the previous step is finished, run `npm run start` to start the frontend of the application.
+6. Open your browser on `http://localhost:4200`
+
+To access the admin page, go to /admin.
+Per default, the admin credentials are: username: "admin", password: "toor".
+
+## Running the tests
+
+Follow these steps to run all available server tests.
+
+1. Go to the /server directory.
+2. Run `./gradlew test`
+
+## Built With
+
+* [Spring](https://spring.io/) - The Java application framework used
+* [Gradle](https://gradle.org/) - Dependency Management & Build Tool
+* [Angular 8](https://angular.io/) - The web application framework used
